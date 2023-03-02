@@ -1,86 +1,39 @@
 #include <stdio.h>
-#include <math.h>
-//void check (int n)
-//{
-//	do{
-//		scanf("%d", &n);
-//		if(n < 10 || n > 100)
-//		{
-//			printf("10 <= n <= 100");
-//		}
-//	}while(n < 10 || n > 100);
-//}
-//void Nhap (int a[], int n)
-//{
-//	for(int i = 0; i < n; i++)
-//	{
-//		scanf("%d", &a[i]);
-//	}
-//}
-int tbc (int a[], int n)
-{
-	int count = 0;
-	float tong = 0, tbcc;
-	for(int i; i < n; i++)
-	{
-		if(i % 2 != 0 && a[i] > 0)
-		{
-			count++;
-			tong += a[i];
-		}
-	}
-	for(int i; i < n; i++)
-	{
-		if(a[i] > 0 && i % 2 != 0)
-		{
-			tbcc = tong / count;
-		}
-	}
-	return tbcc;
-}
 main()
 {
-	int n;
-	int dem = 0, count = 0;
-	float tong = 0, tbcc;
-	scanf("%d", &n);
-	int a[n];
+	long long int n, dem = 0;
+	double tong = 0;
+	scanf("%lld", &n);
+	double a[n];
 	for(int i = 0; i < n; i++)
 	{
-		scanf("%d", &a[i]);
+		scanf("%lf", &a[i]);
 	}
-	for(int i = 0; i < n; i++)
-	{
-		int j = 0;
-		while(j * j <= a[i])
-		{
-			if (j * j == a[i])
+	double tg;
+    for(int i = 0; i < n - 1; i++){
+        for(int j = i + 1; j < n; j++){
+            if(a[i] < a[j])
 			{
-				printf("%d ", a[i]);
-				dem ++;
-			}
-			j++;
-		}
+                tg = a[i];
+                a[i] = a[j];
+                a[j] = tg;        
+            }
+        }
+    }
+    for(int i = 0; i < 3; i++)
+    {
+    	printf("%.1lf ", a[i]);
 	}
-	if(dem == 0)
+	double min = a[0];
+	for(int i = 0; i < n; i++)
 	{
-		printf("Day khong co so chinh phuong");
+		if(min > a[i])
+		{
+			min = a[i];
+		}
+		tong += a[i];
 	}
-	printf("\nTBC = %d",tbc(a, n));
-//	for(int i; i < n; i++)
-//	{
-//		if(i % 2 != 0 && a[i] > 0)
-//		{
-//			count++;
-//			tong += a[i];
-//		}
-//	}
-//	for(int i; i < n; i++)
-//	{
-//		if(a[i] > 0 && i % 2 != 0)
-//		{
-//			tbcc = tong / count;
-//		}
-//	}
-//	printf("%f", tbcc);
+	double tbc;
+	tbc = tong / n;
+	printf("\n%.1lf %.1lf", min, tbc);
 }
